@@ -13,7 +13,7 @@ export default function PokemonList({ offset }: any) {
 	return (
 		<CardColumns>
 			{pokemon.map((poke: pokeShort) => (
-				<Card key={poke.name}>
+				<Card id="pkmn-card" key={poke.name}>
 					<Card.Body>
 						<Card.Title>
 							{poke.name.charAt(0).toUpperCase() + poke.name.slice(1)}

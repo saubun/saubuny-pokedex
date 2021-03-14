@@ -34,3 +34,14 @@ type spritesObject = {
 	front_shiny: string;
 	front_shiny_female: string;
 };
+
+// ----------------------------------------------------- //
+
+type moveURL = {
+	effect_entries: effectObject;
+};
+
+type effectObject = {
+	effect: string;
+	short_effect: string;
+};
