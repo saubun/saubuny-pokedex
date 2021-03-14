@@ -3,9 +3,9 @@ type poke = {
 	name: string;
 	height: number;
 	weight: number;
-	moves: pokeShort[];
+	moves: pokeShortMoves[];
 	species: pokeShort;
-	types: pokeShort[];
+	types: pokeShortTypes[];
 	id: number;
 };
 
@@ -13,4 +13,12 @@ type poke = {
 type pokeShort = {
 	name: string;
 	url: string;
+};
+
+type pokeShortTypes = {
+	type: pokeShort;
+};
+
+type pokeShortMoves = {
+	move: pokeShort;
 };
