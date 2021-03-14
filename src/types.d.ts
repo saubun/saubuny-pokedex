@@ -4,7 +4,6 @@ type poke = {
 	height: number;
 	weight: number;
 	moves: pokeShortMoves[];
-	species: pokeShort;
 	types: pokeShortTypes[];
 	id: number;
 	sprites: spritesObject;

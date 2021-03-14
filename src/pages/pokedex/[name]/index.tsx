@@ -7,27 +7,20 @@ import {
 } from 'react-bootstrap';
 import { useRouter } from 'next/dist/client/router';
 import React, { useState } from 'react';
-
-type nameProps = {
-	poke: poke;
-};
+import axios from 'axios';
 
 // TODO: Add Pages for viewing moves and types
 // TODO: A lot of refactoring here and splitting into different components
 
-export default function pokemon({ poke }: nameProps) {
+type pokeProps = {
+	poke: poke;
+};
+
+export default function pokemon({ poke }: pokeProps) {
 	const [moreMoves, setMoreMoves] = useState(false);
-	const [movesDisplay, setMovesDisplay] = useState(
-		<CardColumns>
-			{poke.moves.slice(0, 12).map((obj) => (
-				<Card id="pkmn-card" key={obj.move.name}>
-					<Card.Body>
-						{obj.move.name.charAt(0).toUpperCase() + obj.move.name.slice(1)}
-					</Card.Body>
-				</Card>
-			))}
-		</CardColumns>
-	);
+	const [movesDisplay, setMovesDisplay] = useState(<></>);
+	const router = useRouter();
+	const { name } = router.query;
 
 	const showMoreMoves = () => {
 		setMovesDisplay(
@@ -59,9 +52,6 @@ export default function pokemon({ poke }: nameProps) {
 		setMoreMoves(false);
 	};
 
-	const router = useRouter();
-	const { name } = router.query;
-
 	return (
 		<Container className="my-3">
 			<Card>
@@ -77,9 +67,7 @@ export default function pokemon({ poke }: nameProps) {
 						/>
 
 						<p>
-							Species:{' '}
-							{poke.species.name.charAt(0).toUpperCase() +
-								poke.species.name.slice(1)}
+							Species: {poke.name.charAt(0).toUpperCase() + poke.name.slice(1)}
 						</p>
 
 						<p>Id: {poke.id}</p>
@@ -116,16 +104,30 @@ export default function pokemon({ poke }: nameProps) {
 	);
 }
 
-// Fetch individaul pokemon data (The only errory is trying to read the favicon.ico as json)
-export const getServerSideProps = async (context: any) => {
+export const getStaticProps = async (context: any) => {
 	const res = await fetch(
 		`https://pokeapi.co/api/v2/pokemon/${context.params.name}`
 	);
-	const poke = await res.json().catch();
+	const poke = await res.json();
 
 	return {
 		props: {
 			poke,
 		},
 	};
+};
+
+export const getStaticPaths = async () => {
+	const res = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=1118`);
+	const pokemon = await res.json();
+
+	const pokenames = pokemon.results.map((obj: any) => obj.name);
+
+	const paths = pokenames.map((pokename: string) => ({
+		params: {
+			name: pokename,
+		},
+	}));
+
+	return { paths, fallback: false };
 };
