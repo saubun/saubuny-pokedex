@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useState } from 'react';
 import {
 	Form,
@@ -24,12 +25,19 @@ export default function TopNavBar() {
 	return (
 		<>
 			<Navbar bg="primary" expand="lg" variant="dark" fixed="top">
-				<Navbar.Brand href="/">Saubuny Pokedex</Navbar.Brand>
+				<Link href="/">
+					<Navbar.Brand as="a">Saubuny Pokedex</Navbar.Brand>
+				</Link>
+
 				<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 				<Navbar.Collapse id="responsive-navbar-nav">
 					<Nav className="mr-auto">
-						<Nav.Link href="/">Home</Nav.Link>
-						<Nav.Link href="/pokedex">Pokedex</Nav.Link>
+						<Link href="/">
+							<Nav.Link as="a">Home</Nav.Link>
+						</Link>
+						<Link href="/pokedex">
+							<Nav.Link as="a">Pokedex</Nav.Link>
+						</Link>
 					</Nav>
 
 					<Form inline onSubmit={handleSubmit}>

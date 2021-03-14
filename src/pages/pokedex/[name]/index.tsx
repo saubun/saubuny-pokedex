@@ -5,9 +5,8 @@ import {
 	CardDeck,
 	Container,
 } from 'react-bootstrap';
-import { useRouter } from 'next/dist/client/router';
 import React, { useState } from 'react';
-import axios from 'axios';
+import Link from 'next/link';
 
 // TODO: Add Pages for viewing moves and types
 // TODO: A lot of refactoring here and splitting into different components
@@ -18,27 +17,8 @@ type pokeProps = {
 
 export default function pokemon({ poke }: pokeProps) {
 	const [moreMoves, setMoreMoves] = useState(false);
-	const [movesDisplay, setMovesDisplay] = useState(<></>);
-	const router = useRouter();
-	const { name } = router.query;
-
-	const showMoreMoves = () => {
-		setMovesDisplay(
-			<CardColumns>
-				{poke.moves.map((obj) => (
-					<Card id="pkmn-card" key={obj.move.name}>
-						<Card.Body>
-							{obj.move.name.charAt(0).toUpperCase() + obj.move.name.slice(1)}
-						</Card.Body>
-					</Card>
-				))}
-			</CardColumns>
-		);
-		setMoreMoves(true);
-	};
-
-	const showLessMoves = () => {
-		setMovesDisplay(
+	const [movesDisplay, setMovesDisplay] = useState(
+		<>
 			<CardColumns>
 				{poke.moves.slice(0, 12).map((obj) => (
 					<Card id="pkmn-card" key={obj.move.name}>
@@ -48,6 +28,39 @@ export default function pokemon({ poke }: pokeProps) {
 					</Card>
 				))}
 			</CardColumns>
+		</>
+	);
+
+	const showMoreMoves = () => {
+		setMovesDisplay(
+			<>
+				<CardColumns>
+					{poke.moves.map((obj) => (
+						<Card id="pkmn-card" key={obj.move.name}>
+							<Card.Body>
+								{obj.move.name.charAt(0).toUpperCase() + obj.move.name.slice(1)}
+							</Card.Body>
+						</Card>
+					))}
+				</CardColumns>
+			</>
+		);
+		setMoreMoves(true);
+	};
+
+	const showLessMoves = () => {
+		setMovesDisplay(
+			<>
+				<CardColumns>
+					{poke.moves.slice(0, 12).map((obj) => (
+						<Card id="pkmn-card" key={obj.move.name}>
+							<Card.Body>
+								{obj.move.name.charAt(0).toUpperCase() + obj.move.name.slice(1)}
+							</Card.Body>
+						</Card>
+					))}
+				</CardColumns>
+			</>
 		);
 		setMoreMoves(false);
 	};
@@ -98,6 +111,12 @@ export default function pokemon({ poke }: pokeProps) {
 
 						{movesDisplay}
 					</Card.Body>
+
+					<Link href="/pokedex">
+						<Button className="mx-3 mb-4" variant="primary">
+							Go back
+						</Button>
+					</Link>
 				</div>
 			</Card>
 		</Container>

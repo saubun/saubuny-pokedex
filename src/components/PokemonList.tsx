@@ -6,6 +6,7 @@ import Link from 'next/link';
 export default function PokemonList({ offset }: any) {
 	const [pokemon, setPokemon] = useState([]);
 
+	// Axios is used because i need the offset prop :(
 	axios
 		.get(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=21`)
 		.then((res) => setPokemon(res.data.results));
