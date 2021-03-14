@@ -1,5 +1,5 @@
 import { AppProps } from 'next/app';
-import '../styles/global.scss';
+import 'bootswatch/dist/cosmo/bootstrap.min.css';
 import Layout from '../components/Layout';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
