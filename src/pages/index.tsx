@@ -1,9 +1,14 @@
+import Meta from '../components/Meta';
 import React from 'react';
+import { Container } from 'react-bootstrap';
 
 export default function index() {
-  return (
-    <div>
-      <h1>Hello World!</h1>
-    </div>
-  );
+	return (
+		<>
+			<Meta title="Home" />
+			<Container className="mt-3">
+				<h1>Home Page</h1>
+			</Container>
+		</>
+	);
 }

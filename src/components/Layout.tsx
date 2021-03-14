@@ -1,12 +1,12 @@
 import Meta from './Meta';
+import TopNavBar from './TopNavBar';
 
 export default function Layout({ children }: any) {
 	return (
-		<div className="main">
+		<div>
 			<Meta />
-			<div className="container">
-				<main>{children}</main>
-			</div>
+			<TopNavBar />
+			<div>{children}</div>
 		</div>
 	);
 }
