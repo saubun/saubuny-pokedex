@@ -13,7 +13,6 @@ export default function pokedex() {
 	const [currentPage, setCurrentPage] = useState(1); // TODO: update these to use local storage
 	const [offset, setOffset] = useState(0);
 	const [pageToGoTo, setPageToGoTo] = useState(1);
-	const [alertDisplay, setAlertDisplay] = useState(false);
 
 	const pkmnPerPage = 21;
 
@@ -47,11 +46,8 @@ export default function pokedex() {
 
 	const gotoPage = () => {
 		if (!isNaN(pageToGoTo) && pageToGoTo >= 1 && pageToGoTo <= 53) {
-			setAlertDisplay(false);
 			setCurrentPage(pageToGoTo);
 			setOffset(pageToGoTo * pkmnPerPage - pkmnPerPage);
-		} else {
-			setAlertDisplay(true);
 		}
 	};
 
@@ -61,19 +57,6 @@ export default function pokedex() {
 	};
 
 	// ----------------------------------------------------- //
-
-	const AlertComponent = () => {
-		if (alertDisplay) {
-			return (
-				<Alert variant="danger">
-					<Alert.Heading>Thats not a valid input!</Alert.Heading>
-					<p>Please try again with a different value.</p>
-				</Alert>
-			);
-		} else {
-			return <></>;
-		}
-	};
 
 	// ----------------------------------------------------- //
 
@@ -103,20 +86,15 @@ export default function pokedex() {
 					</Button>
 
 					<Container>
-						<AlertComponent />
-
-						<InputGroup className="mt-3">
-							<FormControl
-								as="input"
-								type="text"
-								placeholder="Go to page..."
-								value={pageToGoTo}
-								onChange={handleChange}
-							/>
-							<InputGroup.Append>
-								<Button onClick={gotoPage}>Go</Button>
-							</InputGroup.Append>
-						</InputGroup>
+						<FormControl
+							type="range"
+							value={pageToGoTo}
+							onChange={handleChange}
+							min="1"
+							max="53"
+							className="my-3"
+						/>
+						<Button onClick={gotoPage}>Go To Page {pageToGoTo}</Button>
 					</Container>
 				</div>
 
