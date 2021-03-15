@@ -53,3 +53,31 @@ type effectObject = {
 	effect: string;
 	short_effect: string;
 };
+
+// ----------------------------------------------------- //
+
+type typeURL = {
+	id: number;
+	name: string;
+	move_damage_class: pokeShort;
+	moves: pokeShort[];
+	pokemon: pokeShort[];
+	damage_relations: damageRelationsType;
+};
+
+type damageRelationsType = {
+	double_damage_from?: pokeShort[];
+	double_damage_to?: pokeShort[];
+	half_damage_from?: pokeShort[];
+	half_damage_to?: pokeShort[];
+	no_damage_from?: pokeShort[];
+	no_damage_to?: pokeShort[];
+};
+
+type typesListProps = {
+	types: pokeShort[];
+};
+
+type typesProps = {
+	type: typeURL;
+};

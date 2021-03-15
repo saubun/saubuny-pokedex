@@ -119,18 +119,34 @@ export default function pokemon({ poke }: pokeProps) {
 							))}
 						</CardDeck>
 
-						<p>Moves:</p>
-						{poke.moves.length > 0 ? (
-							<Button
-								variant="primary"
-								onClick={() => (moreMoves ? showLessMoves() : showMoreMoves())}
-								className="mb-4"
-							>
-								{moreMoves ? 'Show Less Moves' : 'Show More Moves'}
-							</Button>
-						) : (
-							<p>There are no moves listed for this pokemon</p>
-						)}
+						<div
+							className="d-flex flex-row align-items-center"
+							style={{ width: '100%' }}
+						>
+							<p>Moves:</p>
+
+							{poke.moves.length > 0 ? (
+								<Button
+									variant="primary"
+									onClick={() =>
+										moreMoves ? showLessMoves() : showMoreMoves()
+									}
+									className="mb-4"
+									style={{
+										order: 2,
+										marginLeft: 'auto',
+									}}
+									size="sm"
+								>
+									{moreMoves ? 'Show Less Moves' : 'Show More Moves'}
+								</Button>
+							) : (
+								<>
+									<p>There are no moves listed for this pokemon</p>
+								</>
+							)}
+						</div>
+
 						{movesDisplay}
 					</Card.Body>
 
