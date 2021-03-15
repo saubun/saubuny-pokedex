@@ -22,9 +22,11 @@ export default function pokemon({ poke }: pokeProps) {
 			<CardColumns>
 				{poke.moves.slice(0, 12).map((obj) => (
 					<Card id="pkmn-card" key={obj.move.name}>
-						<Card.Body>
-							{obj.move.name.charAt(0).toUpperCase() + obj.move.name.slice(1)}
-						</Card.Body>
+						<Link href="moves/[move]" as={`moves/${obj.move.name}`}>
+							<Card.Body>
+								{obj.move.name.charAt(0).toUpperCase() + obj.move.name.slice(1)}
+							</Card.Body>
+						</Link>
 					</Card>
 				))}
 			</CardColumns>
@@ -37,9 +39,12 @@ export default function pokemon({ poke }: pokeProps) {
 				<CardColumns>
 					{poke.moves.map((obj) => (
 						<Card id="pkmn-card" key={obj.move.name}>
-							<Card.Body>
-								{obj.move.name.charAt(0).toUpperCase() + obj.move.name.slice(1)}
-							</Card.Body>
+							<Link href="moves/[move]" as={`moves/${obj.move.name}`}>
+								<Card.Body>
+									{obj.move.name.charAt(0).toUpperCase() +
+										obj.move.name.slice(1)}
+								</Card.Body>
+							</Link>
 						</Card>
 					))}
 				</CardColumns>
@@ -54,9 +59,12 @@ export default function pokemon({ poke }: pokeProps) {
 				<CardColumns>
 					{poke.moves.slice(0, 12).map((obj) => (
 						<Card id="pkmn-card" key={obj.move.name}>
-							<Card.Body>
-								{obj.move.name.charAt(0).toUpperCase() + obj.move.name.slice(1)}
-							</Card.Body>
+							<Link href="moves/[move]" as={`moves/${obj.move.name}`}>
+								<Card.Body>
+									{obj.move.name.charAt(0).toUpperCase() +
+										obj.move.name.slice(1)}
+								</Card.Body>
+							</Link>
 						</Card>
 					))}
 				</CardColumns>

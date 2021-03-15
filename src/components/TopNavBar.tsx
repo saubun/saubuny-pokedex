@@ -38,6 +38,9 @@ export default function TopNavBar() {
 						<Link href="/pokedex">
 							<Nav.Link as="a">Pokédex</Nav.Link>
 						</Link>
+						<Link href="/moves">
+							<Nav.Link as="a">Moves</Nav.Link>
+						</Link>
 						<Nav.Link href="https://github.com/saubun/saubuny-pokedex">
 							GitHub Repository
 						</Nav.Link>

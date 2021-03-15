@@ -7,28 +7,28 @@ import {
 } from 'react-bootstrap';
 import React, { useState } from 'react';
 import Meta from '../../components/Meta';
-import PokemonList from '../../components/PokemonList';
+import MovesList from '../../components/MovesList';
 
 export default function pokedex() {
 	const [currentPage, setCurrentPage] = useState(1); // TODO: update these to use local storage
 	const [offset, setOffset] = useState(0);
 	const [pageToGoTo, setPageToGoTo] = useState(1);
 
-	const pkmnPerPage = 21;
+	const movesPerPage = 21;
 
 	// ----------------------------------------------------- //
 
 	const gotoPageBefore = () => {
 		if (currentPage > 1 && offset > 0) {
 			setCurrentPage(currentPage - 1);
-			setOffset(offset - pkmnPerPage);
+			setOffset(offset - movesPerPage);
 		}
 	};
 
 	const gotoPageNext = () => {
 		if (currentPage >= 1 && offset >= 0) {
 			setCurrentPage(currentPage + 1);
-			setOffset(offset + pkmnPerPage);
+			setOffset(offset + movesPerPage);
 		}
 	};
 
@@ -38,16 +38,16 @@ export default function pokedex() {
 	};
 
 	const gotoPageLast = () => {
-		setCurrentPage(53);
-		setOffset(pkmnPerPage * 53);
+		setCurrentPage(40);
+		setOffset(movesPerPage * 40);
 	};
 
 	// ----------------------------------------------------- //
 
 	const gotoPage = () => {
-		if (!isNaN(pageToGoTo) && pageToGoTo >= 1 && pageToGoTo <= 53) {
+		if (!isNaN(pageToGoTo) && pageToGoTo >= 1 && pageToGoTo <= 40) {
 			setCurrentPage(pageToGoTo);
-			setOffset(pageToGoTo * pkmnPerPage - pkmnPerPage);
+			setOffset(pageToGoTo * movesPerPage - movesPerPage);
 		}
 	};
 
@@ -62,9 +62,9 @@ export default function pokedex() {
 
 	return (
 		<>
-			<Meta title="Pokédex" />
+			<Meta title="Moves" />
 			<Container className="mt-3 text-center">
-				<h1 className="m-5 mb-1">Pokémon</h1>
+				<h1 className="m-5 mb-1">Moves</h1>
 
 				<div className="row d-flex justify-content-center flex-row">
 					<Button onClick={gotoPageBefore} className="px-5 m-3 mb-5">
@@ -75,7 +75,7 @@ export default function pokedex() {
 					</Button>
 				</div>
 
-				<PokemonList offset={offset} />
+				<MovesList offset={offset} />
 
 				<div className="row d-flex justify-content-center flex-row">
 					<Button onClick={gotoPageFirst} className="px-5 m-3 my-5">
@@ -91,7 +91,7 @@ export default function pokedex() {
 							value={pageToGoTo}
 							onChange={handleChange}
 							min="1"
-							max="53"
+							max="40"
 							className="my-3"
 							custom
 						/>

@@ -37,7 +37,16 @@ type spritesObject = {
 // ----------------------------------------------------- //
 
 type moveURL = {
-	effect_entries: effectObject;
+	name: string;
+	accuracy: number;
+	effect_entries: effectObject[];
+	damage_class: pokeShort;
+	id: number;
+	type: pokeShort;
+	power: number;
+	pp: number;
+	learned_by_pokemon: pokeShort[];
+	effect_chance: number | null;
 };
 
 type effectObject = {
