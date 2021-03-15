@@ -16,12 +16,21 @@ export default function type({
 	type,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
 	const [moreMoves, setMoreMoves] = useState(false);
+	const [morePoke, setMorePoke] = useState(false);
 
 	const router = useRouter();
+
+	// ----------------------------------------------------- //
 
 	const handleCardClickMoves = (obj: pokeShort) => {
 		router.push('/moves/[move]', `/moves/${obj.name}`);
 	};
+
+	const handleCardClickPoke = (obj: pokeShort) => {
+		router.push('/pokedex/[name]', `/pokedex/${obj.name}`);
+	};
+
+	// ----------------------------------------------------- //
 
 	const [movesDisplay, setMovesDisplay] = useState(
 		<>
@@ -81,6 +90,71 @@ export default function type({
 		setMoreMoves(false);
 	};
 
+	// ----------------------------------------------------- //
+
+	const [pokeDisplay, setPokeDisplay] = useState(
+		<>
+			<CardColumns>
+				{type.pokemon.slice(0, 6).map((obj: typePokeShort) => (
+					<Card
+						id="pkmn-card"
+						key={obj.pokemon.name}
+						onClick={() => handleCardClickPoke(obj.pokemon)}
+					>
+						<Card.Body>
+							{obj.pokemon.name.charAt(0).toUpperCase() +
+								obj.pokemon.name.slice(1)}
+						</Card.Body>
+					</Card>
+				))}
+			</CardColumns>
+		</>
+	);
+
+	const showMorePoke = () => {
+		setPokeDisplay(
+			<>
+				<CardColumns>
+					{type.pokemon.map((obj: typePokeShort) => (
+						<Card
+							id="pkmn-card"
+							key={obj.pokemon.name}
+							onClick={() => handleCardClickPoke(obj.pokemon)}
+						>
+							<Card.Body>
+								{obj.pokemon.name.charAt(0).toUpperCase() +
+									obj.pokemon.name.slice(1)}
+							</Card.Body>
+						</Card>
+					))}
+				</CardColumns>
+			</>
+		);
+		setMorePoke(true);
+	};
+
+	const showLessPoke = () => {
+		setPokeDisplay(
+			<CardColumns>
+				{type.pokemon.slice(0, 6).map((obj: typePokeShort) => (
+					<Card
+						id="pkmn-card"
+						key={obj.pokemon.name}
+						onClick={() => handleCardClickPoke(obj.pokemon)}
+					>
+						<Card.Body>
+							{obj.pokemon.name.charAt(0).toUpperCase() +
+								obj.pokemon.name.slice(1)}
+						</Card.Body>
+					</Card>
+				))}
+			</CardColumns>
+		);
+		setMorePoke(false);
+	};
+
+	// ----------------------------------------------------- //
+
 	return (
 		<Container className="my-3">
 			<Card>
@@ -103,9 +177,11 @@ export default function type({
 								: 'Unkown'}
 						</p>
 
+						{/* Moves with type */}
+
 						{type.moves.length > 0 ? (
 							<div
-								className="d-flex flex-row align-items-center"
+								className="d-flex flex-row align-items-center mt-3"
 								style={{ width: '100%' }}
 							>
 								<p>Moves with this Type:</p>
@@ -128,6 +204,32 @@ export default function type({
 							<p>Moves with this Type: Unkown</p>
 						)}
 						{movesDisplay}
+
+						{/* Pokemon with Type */}
+
+						{type.pokemon.length > 0 ? (
+							<div
+								className="d-flex flex-row align-items-center mt-3"
+								style={{ width: '100%' }}
+							>
+								<p>Pokemon with this Type:</p>
+								<Button
+									variant="primary"
+									onClick={() => (morePoke ? showLessPoke() : showMorePoke())}
+									className="mb-4"
+									style={{
+										order: 2,
+										marginLeft: 'auto',
+									}}
+									size="sm"
+								>
+									{morePoke ? 'Show Less Pokemon' : 'Show More Pokemon'}
+								</Button>
+							</div>
+						) : (
+							<p>Pokemon with this type: Unkown</p>
+						)}
+						{pokeDisplay}
 					</Card.Body>
 
 					<Link href="/types">

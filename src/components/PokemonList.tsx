@@ -3,17 +3,20 @@ import { Button, Card, CardColumns } from 'react-bootstrap';
 import axios from 'axios';
 import Link from 'next/link';
 
-export default function PokemonList({ offset }: any) {
-	const [pokemon, setPokemon] = useState([]);
+interface pokemonListProps {
+	pkmnPerPage: number;
+	offset: number;
+	pokemon: pokeShort[];
+}
 
-	// Axios is used because i need the offset prop :(
-	axios
-		.get(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=21`)
-		.then((res) => setPokemon(res.data.results));
-
+export default function PokemonList({
+	pkmnPerPage,
+	offset,
+	pokemon,
+}: pokemonListProps) {
 	return (
 		<CardColumns>
-			{pokemon.map((poke: pokeShort) => (
+			{pokemon.slice(offset, offset + pkmnPerPage).map((poke: pokeShort) => (
 				<Card id="pkmn-card" key={poke.name}>
 					<Card.Body>
 						<Card.Title>

@@ -8,8 +8,11 @@ import {
 import React, { useState } from 'react';
 import Meta from '../../components/Meta';
 import MovesList from '../../components/MovesList';
+import { InferGetStaticPropsType } from 'next';
 
-export default function pokedex() {
+export default function pokedex({
+	moves,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
 	const [currentPage, setCurrentPage] = useState(1); // TODO: update these to use local storage
 	const [offset, setOffset] = useState(0);
 	const [pageToGoTo, setPageToGoTo] = useState(1);
@@ -58,8 +61,6 @@ export default function pokedex() {
 
 	// ----------------------------------------------------- //
 
-	// ----------------------------------------------------- //
-
 	return (
 		<>
 			<Meta title="Moves" />
@@ -75,7 +76,7 @@ export default function pokedex() {
 					</Button>
 				</div>
 
-				<MovesList offset={offset} />
+				<MovesList offset={offset} movesPerPage={movesPerPage} moves={moves} />
 
 				<div className="row d-flex justify-content-center flex-row">
 					<Button onClick={gotoPageFirst} className="px-5 m-3 my-5">
@@ -104,3 +105,16 @@ export default function pokedex() {
 		</>
 	);
 }
+
+// Get all Pokemon
+export const getStaticProps = async () => {
+	const res = await fetch(`https://pokeapi.co/api/v2/move?limit=843`);
+	const movesjson = await res.json();
+	const moves: pokeShort[] = movesjson.results;
+
+	return {
+		props: {
+			moves,
+		},
+	};
+};

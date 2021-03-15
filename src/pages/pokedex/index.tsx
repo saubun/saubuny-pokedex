@@ -1,15 +1,12 @@
-import {
-	Button,
-	Container,
-	FormControl,
-	InputGroup,
-	Alert,
-} from 'react-bootstrap';
+import { Button, Container, FormControl } from 'react-bootstrap';
 import React, { useState } from 'react';
 import Meta from '../../components/Meta';
 import PokemonList from '../../components/PokemonList';
+import { InferGetStaticPropsType } from 'next';
 
-export default function pokedex() {
+export default function pokedex({
+	pokemon,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
 	const [currentPage, setCurrentPage] = useState(1); // TODO: update these to use local storage
 	const [offset, setOffset] = useState(0);
 	const [pageToGoTo, setPageToGoTo] = useState(1);
@@ -75,7 +72,11 @@ export default function pokedex() {
 					</Button>
 				</div>
 
-				<PokemonList offset={offset} />
+				<PokemonList
+					pkmnPerPage={pkmnPerPage}
+					offset={offset}
+					pokemon={pokemon}
+				/>
 
 				<div className="row d-flex justify-content-center flex-row">
 					<Button onClick={gotoPageFirst} className="px-5 m-3 my-5">
@@ -104,3 +105,16 @@ export default function pokedex() {
 		</>
 	);
 }
+
+// Get all Pokemon
+export const getStaticProps = async () => {
+	const res = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=1118`);
+	const pokejson = await res.json();
+	const pokemon: pokeShort[] = pokejson.results;
+
+	return {
+		props: {
+			pokemon,
+		},
+	};
+};

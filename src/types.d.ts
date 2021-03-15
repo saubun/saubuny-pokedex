@@ -61,7 +61,7 @@ type typeURL = {
 	name: string;
 	move_damage_class?: pokeShort;
 	moves: pokeShort[];
-	pokemon: pokeShort[];
+	pokemon: typePokeShort[];
 	damage_relations: damageRelationsType;
 };
 
@@ -80,4 +80,9 @@ type typesListProps = {
 
 type typesProps = {
 	type: typeURL;
+};
+
+type typePokeShort = {
+	pokemon: pokeShort;
+	slot: number;
 };

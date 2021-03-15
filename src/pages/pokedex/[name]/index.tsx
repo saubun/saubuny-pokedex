@@ -21,8 +21,12 @@ export default function pokemon({ poke }: pokeProps) {
 
 	const router = useRouter();
 
-	const handleCardClick = (obj: pokeShortMoves) => {
+	const handleCardClickMoves = (obj: pokeShortMoves) => {
 		router.push('/moves/[move]', `/moves/${obj.move.name}`);
+	};
+
+	const handleCardClickTypes = (obj: pokeShortTypes) => {
+		router.push('/types/[type]', `/types/${obj.type.name}`);
 	};
 
 	const [movesDisplay, setMovesDisplay] = useState(
@@ -32,7 +36,7 @@ export default function pokemon({ poke }: pokeProps) {
 					<Card
 						id="pkmn-card"
 						key={obj.move.name}
-						onClick={() => handleCardClick(obj)}
+						onClick={() => handleCardClickMoves(obj)}
 					>
 						<Card.Body>
 							{obj.move.name.charAt(0).toUpperCase() + obj.move.name.slice(1)}
@@ -51,7 +55,7 @@ export default function pokemon({ poke }: pokeProps) {
 						<Card
 							id="pkmn-card"
 							key={obj.move.name}
-							onClick={() => handleCardClick(obj)}
+							onClick={() => handleCardClickMoves(obj)}
 						>
 							<Card.Body>
 								{obj.move.name.charAt(0).toUpperCase() + obj.move.name.slice(1)}
@@ -72,7 +76,7 @@ export default function pokemon({ poke }: pokeProps) {
 						<Card
 							id="pkmn-card"
 							key={obj.move.name}
-							onClick={() => handleCardClick(obj)}
+							onClick={() => handleCardClickMoves(obj)}
 						>
 							<Card.Body>
 								{obj.move.name.charAt(0).toUpperCase() + obj.move.name.slice(1)}
@@ -110,7 +114,11 @@ export default function pokemon({ poke }: pokeProps) {
 						<p>Types:</p>
 						<CardDeck className="my-3">
 							{poke.types.map((obj) => (
-								<Card id="pkmn-card" key={obj.type.name}>
+								<Card
+									id="pkmn-card"
+									key={obj.type.name}
+									onClick={() => handleCardClickTypes(obj)}
+								>
 									<Card.Body>
 										{obj.type.name.charAt(0).toUpperCase() +
 											obj.type.name.slice(1)}

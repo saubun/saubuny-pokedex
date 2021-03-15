@@ -24,6 +24,10 @@ export default function move({ move }: moveProps) {
 		router.push('/pokedex/[name]', `/pokedex/${obj.name}`);
 	};
 
+	const handleClickType = () => {
+		router.push('/types/[type]', `/types/${move.type.name}`);
+	};
+
 	const [pokeDisplay, setPokeDisplay] = useState(
 		<>
 			<CardColumns>
@@ -100,12 +104,26 @@ export default function move({ move }: moveProps) {
 						<p>
 							Name: {move.name.charAt(0).toUpperCase() + move.name.slice(1)}
 						</p>
-						<p>Type: {move.type.name}</p>
 						<p>Accuracy: {move.accuracy}</p>
 						<p>Power: {move.power}</p>
 						<p>PP: {move.pp}</p>
 						<p>Id: {move.id}</p>
 						{move.effect_chance && <p>Effect Chance: {move.effect_chance}</p>}
+
+						<p>Type: </p>
+						<CardDeck className="my-3">
+							<Card
+								key={move.type.name}
+								onClick={handleClickType}
+								style={{ cursor: 'pointer' }}
+								id="pkmn-card"
+							>
+								<Card.Body>
+									{move.type.name.charAt(0).toUpperCase() +
+										move.type.name.slice(1)}
+								</Card.Body>
+							</Card>
+						</CardDeck>
 
 						<p>Effects:</p>
 						<CardDeck className="my-3">
