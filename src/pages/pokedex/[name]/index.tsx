@@ -100,15 +100,17 @@ export default function pokemon({ poke }: pokeProps) {
 						</CardDeck>
 
 						<p>Moves:</p>
-
-						<Button
-							variant="primary"
-							onClick={() => (moreMoves ? showLessMoves() : showMoreMoves())}
-							className="mb-4"
-						>
-							{moreMoves ? 'Show Less Moves' : 'Show More Moves'}
-						</Button>
-
+						{poke.moves.length > 0 ? (
+							<Button
+								variant="primary"
+								onClick={() => (moreMoves ? showLessMoves() : showMoreMoves())}
+								className="mb-4"
+							>
+								{moreMoves ? 'Show Less Moves' : 'Show More Moves'}
+							</Button>
+						) : (
+							<p>There are no moves listed for this pokemon</p>
+						)}
 						{movesDisplay}
 					</Card.Body>
 

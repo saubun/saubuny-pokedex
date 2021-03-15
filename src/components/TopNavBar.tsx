@@ -26,7 +26,7 @@ export default function TopNavBar() {
 		<>
 			<Navbar bg="primary" expand="lg" variant="dark" fixed="top">
 				<Link href="/">
-					<Navbar.Brand as="a">Saubuny Pokedex</Navbar.Brand>
+					<Navbar.Brand as="a">Saubuny Pokédex</Navbar.Brand>
 				</Link>
 
 				<Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -36,8 +36,11 @@ export default function TopNavBar() {
 							<Nav.Link as="a">Home</Nav.Link>
 						</Link>
 						<Link href="/pokedex">
-							<Nav.Link as="a">Pokedex</Nav.Link>
+							<Nav.Link as="a">Pokédex</Nav.Link>
 						</Link>
+						<Nav.Link href="https://github.com/saubun/saubuny-pokedex">
+							GitHub Repository
+						</Nav.Link>
 					</Nav>
 
 					<Form inline onSubmit={handleSubmit}>
