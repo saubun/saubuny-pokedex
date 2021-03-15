@@ -7,6 +7,7 @@ import {
 } from 'react-bootstrap';
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 // TODO: Add Pages for viewing moves and types
 // TODO: A lot of refactoring here and splitting into different components
@@ -17,16 +18,25 @@ type pokeProps = {
 
 export default function pokemon({ poke }: pokeProps) {
 	const [moreMoves, setMoreMoves] = useState(false);
+
+	const router = useRouter();
+
+	const handleCardClick = (obj: pokeShortMoves) => {
+		router.push('/moves/[move]', `/moves/${obj.move.name}`);
+	};
+
 	const [movesDisplay, setMovesDisplay] = useState(
 		<>
 			<CardColumns>
 				{poke.moves.slice(0, 12).map((obj) => (
-					<Card id="pkmn-card" key={obj.move.name}>
-						<Link href="moves/[move]" as={`moves/${obj.move.name}`}>
-							<Card.Body>
-								{obj.move.name.charAt(0).toUpperCase() + obj.move.name.slice(1)}
-							</Card.Body>
-						</Link>
+					<Card
+						id="pkmn-card"
+						key={obj.move.name}
+						onClick={() => handleCardClick(obj)}
+					>
+						<Card.Body>
+							{obj.move.name.charAt(0).toUpperCase() + obj.move.name.slice(1)}
+						</Card.Body>
 					</Card>
 				))}
 			</CardColumns>
@@ -38,13 +48,14 @@ export default function pokemon({ poke }: pokeProps) {
 			<>
 				<CardColumns>
 					{poke.moves.map((obj) => (
-						<Card id="pkmn-card" key={obj.move.name}>
-							<Link href="moves/[move]" as={`moves/${obj.move.name}`}>
-								<Card.Body>
-									{obj.move.name.charAt(0).toUpperCase() +
-										obj.move.name.slice(1)}
-								</Card.Body>
-							</Link>
+						<Card
+							id="pkmn-card"
+							key={obj.move.name}
+							onClick={() => handleCardClick(obj)}
+						>
+							<Card.Body>
+								{obj.move.name.charAt(0).toUpperCase() + obj.move.name.slice(1)}
+							</Card.Body>
 						</Card>
 					))}
 				</CardColumns>
@@ -58,13 +69,14 @@ export default function pokemon({ poke }: pokeProps) {
 			<>
 				<CardColumns>
 					{poke.moves.slice(0, 12).map((obj) => (
-						<Card id="pkmn-card" key={obj.move.name}>
-							<Link href="moves/[move]" as={`moves/${obj.move.name}`}>
-								<Card.Body>
-									{obj.move.name.charAt(0).toUpperCase() +
-										obj.move.name.slice(1)}
-								</Card.Body>
-							</Link>
+						<Card
+							id="pkmn-card"
+							key={obj.move.name}
+							onClick={() => handleCardClick(obj)}
+						>
+							<Card.Body>
+								{obj.move.name.charAt(0).toUpperCase() + obj.move.name.slice(1)}
+							</Card.Body>
 						</Card>
 					))}
 				</CardColumns>

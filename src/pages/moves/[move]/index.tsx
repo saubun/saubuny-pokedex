@@ -7,25 +7,35 @@ import {
 	Button,
 } from 'react-bootstrap';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 type moveProps = {
 	move: moveURL;
 };
 
-// TODO: Lots of refactoring to do here too
+// TODO: Lots of refactoring to do here too, really messy
 
 export default function move({ move }: moveProps) {
 	const [morePoke, setMorePoke] = useState(false);
+
+	const router = useRouter();
+
+	const handleCardClick = (obj: pokeShort) => {
+		router.push('/pokedex/[name]', `/pokedex/${obj.name}`);
+	};
+
 	const [pokeDisplay, setPokeDisplay] = useState(
 		<>
 			<CardColumns>
 				{move.learned_by_pokemon.slice(0, 12).map((obj) => (
-					<Card id="pkmn-card" key={obj.name}>
-						<Link href="pokedex/[name]" as={`pokedex/${obj.name}`}>
-							<Card.Body>
-								{obj.name.charAt(0).toUpperCase() + obj.name.slice(1)}
-							</Card.Body>
-						</Link>
+					<Card
+						id="pkmn-card"
+						key={obj.name}
+						onClick={() => handleCardClick(obj)}
+					>
+						<Card.Body>
+							{obj.name.charAt(0).toUpperCase() + obj.name.slice(1)}
+						</Card.Body>
 					</Card>
 				))}
 			</CardColumns>
@@ -37,7 +47,11 @@ export default function move({ move }: moveProps) {
 			<>
 				<CardColumns>
 					{move.learned_by_pokemon.map((obj) => (
-						<Card id="pkmn-card" key={obj.name}>
+						<Card
+							id="pkmn-card"
+							key={obj.name}
+							onClick={() => handleCardClick(obj)}
+						>
 							<Link href="moves/[move]" as={`moves/${obj.name}`}>
 								<Card.Body>
 									{obj.name.charAt(0).toUpperCase() + obj.name.slice(1)}
@@ -56,7 +70,11 @@ export default function move({ move }: moveProps) {
 			<>
 				<CardColumns>
 					{move.learned_by_pokemon.slice(0, 12).map((obj) => (
-						<Card id="pkmn-card" key={obj.name}>
+						<Card
+							id="pkmn-card"
+							key={obj.name}
+							onClick={() => handleCardClick(obj)}
+						>
 							<Link href="moves/[move]" as={`moves/${obj.name}`}>
 								<Card.Body>
 									{obj.name.charAt(0).toUpperCase() + obj.name.slice(1)}
@@ -82,7 +100,7 @@ export default function move({ move }: moveProps) {
 						<p>
 							Name: {move.name.charAt(0).toUpperCase() + move.name.slice(1)}
 						</p>
-						<p>Type: {move.type}</p>
+						<p>Type: {move.type.name}</p>
 						<p>Accuracy: {move.accuracy}</p>
 						<p>Power: {move.power}</p>
 						<p>PP: {move.pp}</p>
