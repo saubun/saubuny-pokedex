@@ -21,7 +21,7 @@ export default function move({ move }: moveProps) {
 			<CardColumns>
 				{move.learned_by_pokemon.slice(0, 12).map((obj) => (
 					<Card id="pkmn-card" key={obj.name}>
-						<Link href="moves/[move]" as={`moves/${obj.name}`}>
+						<Link href="pokedex/[name]" as={`pokedex/${obj.name}`}>
 							<Card.Body>
 								{obj.name.charAt(0).toUpperCase() + obj.name.slice(1)}
 							</Card.Body>
@@ -141,7 +141,7 @@ export const getStaticPaths = async () => {
 	const res = await fetch(`https://pokeapi.co/api/v2/move?limit=843`);
 	const moves = await res.json();
 
-	const movenames = moves.results.map((obj: any) => obj.name);
+	const movenames = moves.results.map((obj: pokeShort) => obj.name);
 
 	const paths = movenames.map((movename: string) => ({
 		params: {
