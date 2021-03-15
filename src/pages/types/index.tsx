@@ -8,8 +8,11 @@ import {
 import React, { useState } from 'react';
 import Meta from '../../components/Meta';
 import TypesList from '../../components/TypesList';
+import { InferGetStaticPropsType } from 'next';
 
-export default function pokedex({ types }: typesListProps) {
+export default function pokedex({
+	types,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
 	return (
 		<>
 			<Meta title="Types" />
@@ -28,7 +31,7 @@ export default function pokedex({ types }: typesListProps) {
 export const getStaticProps = async () => {
 	const res = await fetch(`https://pokeapi.co/api/v2/type`);
 	const typesjson = await res.json();
-	const types = typesjson.results;
+	const types: pokeShort[] = typesjson.results;
 
 	return {
 		props: {

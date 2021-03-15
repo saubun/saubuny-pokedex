@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Button, Card, CardColumns } from 'react-bootstrap';
-import axios from 'axios';
 import Link from 'next/link';
 
 export default function TypesList({ types }: typesListProps) {

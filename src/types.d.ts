@@ -59,7 +59,7 @@ type effectObject = {
 type typeURL = {
 	id: number;
 	name: string;
-	move_damage_class: pokeShort;
+	move_damage_class?: pokeShort;
 	moves: pokeShort[];
 	pokemon: pokeShort[];
 	damage_relations: damageRelationsType;

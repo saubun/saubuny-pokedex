@@ -91,35 +91,42 @@ export default function type({
 						</Card.Title>
 
 						<p>
-							Move Name:{' '}
-							{type.name.charAt(0).toUpperCase() + type.name.slice(1)}
+							Name: {type.name.charAt(0).toUpperCase() + type.name.slice(1)}
 						</p>
 
 						<p>Id: {type.id}</p>
 						<p>
 							Damage Type:{' '}
-							{type.move_damage_class.name.charAt(0).toUpperCase() +
-								type.move_damage_class.name.slice(1)}
+							{type.move_damage_class
+								? type.move_damage_class.name.charAt(0).toUpperCase() +
+								  type.move_damage_class.name.slice(1)
+								: 'Unkown'}
 						</p>
 
-						<div
-							className="d-flex flex-row align-items-center"
-							style={{ width: '100%' }}
-						>
-							<p>Moves with this Type:</p>
-							<Button
-								variant="primary"
-								onClick={() => (moreMoves ? showLessMoves() : showMoreMoves())}
-								className="mb-4"
-								style={{
-									order: 2,
-									marginLeft: 'auto',
-								}}
-								size="sm"
+						{type.moves.length > 0 ? (
+							<div
+								className="d-flex flex-row align-items-center"
+								style={{ width: '100%' }}
 							>
-								{moreMoves ? 'Show Less Moves' : 'Show More Moves'}
-							</Button>
-						</div>
+								<p>Moves with this Type:</p>
+								<Button
+									variant="primary"
+									onClick={() =>
+										moreMoves ? showLessMoves() : showMoreMoves()
+									}
+									className="mb-4"
+									style={{
+										order: 2,
+										marginLeft: 'auto',
+									}}
+									size="sm"
+								>
+									{moreMoves ? 'Show Less Moves' : 'Show More Moves'}
+								</Button>
+							</div>
+						) : (
+							<p>Moves with this Type: Unkown</p>
+						)}
 						{movesDisplay}
 					</Card.Body>
 
