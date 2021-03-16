@@ -12,7 +12,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build && next export",
-    "start": "next start"
+    "start": "serve out"
   },
   "dependencies": {
     "axios": "0.21.1",
@@ -21,7 +21,8 @@
     "react": "17.0.1",
     "react-bootstrap": "1.5.2",
     "react-dom": "17.0.1",
-    "sass": "1.32.8"
+    "sass": "1.32.8",
+    "serve": "11.3.2"
   },
   "devDependencies": {
     "@types/node": "14.14.31",

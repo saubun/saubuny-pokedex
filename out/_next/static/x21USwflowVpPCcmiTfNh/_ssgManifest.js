@@ -1,0 +1,1 @@
+self.__SSG_MANIFEST=new Set(["\u002Fmoves","\u002Fpokedex","\u002Ftypes","\u002Ftypes\u002F[type]","\u002Fmoves\u002F[move]","\u002Fpokedex\u002F[name]"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()
