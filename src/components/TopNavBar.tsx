@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import {
 	Form,
 	FormControl,
@@ -11,6 +12,7 @@ import {
 
 export default function TopNavBar() {
 	const [pokemon, setPokemon] = useState('');
+	const router = useRouter();
 
 	// Get pokemon to be searched
 	const handleChange = (e: any) => {
@@ -20,7 +22,13 @@ export default function TopNavBar() {
 	// Search pokemon
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
+		router.push('/pokedex/[name]', `/pokedex/${pokemon}`);
 	};
+
+	// Reset pokemon on pathname change
+	useEffect(() => {
+		setPokemon('');
+	}, [router.pathname]);
 
 	return (
 		<>
