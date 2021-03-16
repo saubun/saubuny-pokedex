@@ -169,13 +169,63 @@ export default function type({
 						</p>
 
 						<p>Id: {type.id}</p>
-						<p>
-							Damage Type:{' '}
-							{type.move_damage_class
-								? type.move_damage_class.name.charAt(0).toUpperCase() +
-								  type.move_damage_class.name.slice(1)
-								: 'Unkown'}
-						</p>
+						<p>Damage Relations: </p>
+						<ul>
+							<li>
+								Double damage taken from:{' '}
+								{type.damage_relations.double_damage_from.length > 0
+									? type.damage_relations.double_damage_from.map(
+											(x) =>
+												x.name.charAt(0).toUpperCase() + x.name.slice(1) + ' '
+									  )
+									: 'None'}
+							</li>
+							<li>
+								Double damage dealt to:{' '}
+								{type.damage_relations.double_damage_to.length > 0
+									? type.damage_relations.double_damage_to.map(
+											(x) =>
+												x.name.charAt(0).toUpperCase() + x.name.slice(1) + ' '
+									  )
+									: 'None'}
+							</li>
+							<li>
+								Half damage taken from:{' '}
+								{type.damage_relations.half_damage_from.length > 0
+									? type.damage_relations.half_damage_from.map(
+											(x) =>
+												x.name.charAt(0).toUpperCase() + x.name.slice(1) + ' '
+									  )
+									: 'None'}
+							</li>
+							<li>
+								Half damage dealt to:{' '}
+								{type.damage_relations.half_damage_to.length > 0
+									? type.damage_relations.half_damage_to.map(
+											(x) =>
+												x.name.charAt(0).toUpperCase() + x.name.slice(1) + ' '
+									  )
+									: 'None'}
+							</li>
+							<li>
+								No damage taken from:{' '}
+								{type.damage_relations.no_damage_from.length > 0
+									? type.damage_relations.no_damage_from.map(
+											(x) =>
+												x.name.charAt(0).toUpperCase() + x.name.slice(1) + ' '
+									  )
+									: 'None'}
+							</li>
+							<li>
+								No damage dealt to:{' '}
+								{type.damage_relations.no_damage_to.length > 0
+									? type.damage_relations.no_damage_to.map(
+											(x) =>
+												x.name.charAt(0).toUpperCase() + x.name.slice(1) + ' '
+									  )
+									: 'None'}
+							</li>
+						</ul>
 
 						{/* Moves with type */}
 

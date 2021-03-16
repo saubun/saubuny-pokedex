@@ -66,12 +66,12 @@ type typeURL = {
 };
 
 type damageRelationsType = {
-	double_damage_from?: pokeShort[];
-	double_damage_to?: pokeShort[];
-	half_damage_from?: pokeShort[];
-	half_damage_to?: pokeShort[];
-	no_damage_from?: pokeShort[];
-	no_damage_to?: pokeShort[];
+	double_damage_from: pokeShort[];
+	double_damage_to: pokeShort[];
+	half_damage_from: pokeShort[];
+	half_damage_to: pokeShort[];
+	no_damage_from: pokeShort[];
+	no_damage_to: pokeShort[];
 };
 
 type typesListProps = {
